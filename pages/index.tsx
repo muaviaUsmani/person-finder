@@ -1,11 +1,18 @@
-import Head from 'next/head';
-import Person from '../models/Person';
+import { ConnectedProps, connect } from 'react-redux'
+
+import Head from 'next/head'
+import Person from '../models/Person'
 import PersonInfo from '../components/PersonInfo/PersonInfo'
 import Search from '../components/Search/Search'
-import persons from '../mocks/persons.json';
+import { loadPersons } from '../store/persons/actions'
 import styles from '../styles/Home.module.scss'
+import { useEffect } from 'react'
 
-export default function Home() {
+const Home: React.FC<PropsFromRedux> = ({persons, loadPersons}) => {
+  useEffect(() => {
+    loadPersons();
+  }, [loadPersons]);
+
   return (
     <div className="container">
       <Head>
@@ -46,3 +53,18 @@ export default function Home() {
     </div>
   )
 }
+
+const mapStateToProps = (state: any) => ({
+  persons: state.persons.persons
+});
+
+const mapDispatchToProps = {
+  loadPersons
+};
+
+const connector = connect(mapStateToProps, mapDispatchToProps);
+
+type PropsFromRedux = ConnectedProps<typeof connector>;
+
+export default connector(Home);
+
