@@ -1,4 +1,16 @@
 .pageTitle {
   margin-top: 6rem;
   margin-bottom: 3rem;
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  color: #102261;
+}
+
+.skeleton {
+  width: 125px;
+  height: 125px;
+  background: #e3e3e3;
+}
+
+.spinner {
+  width: calc(100% - 125px);
 }
